@@ -42,6 +42,8 @@ export TRACKER_NAMES='{"abc123":"Fido","def456":"Rex"}'
 
 ## Usage
 
+### Local
+
 ```sh
 export EMAIL="you@example.com"
 export PASSWORD="your-password"
@@ -51,6 +53,27 @@ export BATTERY_THRESHOLD=40
 export TRACKER_NAMES='{"abc123":"Fido"}'
 
 uv run main.py
+```
+
+### Docker
+
+Build the image:
+
+```sh
+docker build -t tractive-alerts .
+```
+
+Run a container, passing the same environment variables via `-e` flags:
+
+```sh
+docker run --rm \
+  -e EMAIL="you@example.com" \
+  -e PASSWORD="your-password" \
+  -e TELEGRAM_BOT_TOKEN="123456:ABC-DEF" \
+  -e TELEGRAM_CHAT_ID="987654321" \
+  -e BATTERY_THRESHOLD=40 \
+  -e TRACKER_NAMES='{"abc123":"Fido"}' \
+  tractive-alerts
 ```
 
 For each tracker whose `battery_level` is below `BATTERY_THRESHOLD`, a message is printed to stdout and posted to the

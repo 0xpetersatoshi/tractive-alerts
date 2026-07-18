@@ -37,7 +37,7 @@ async def main(
     async with Tractive(email, password) as client:
         await client.authenticate()
 
-        print("authenticated. Getting trackers...")
+        print("Authenticated. Getting trackers...")
         trackers = await client.trackers()
 
         for tracker in trackers:
