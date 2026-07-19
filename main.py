@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+import time
 
 import aiohttp
 from aiotractive import Tractive
@@ -80,13 +81,19 @@ if __name__ == "__main__":
         except json.JSONDecodeError:
             raise Exception("TRACKER_NAMES must be valid JSON")
 
-    asyncio.run(
-        main(
-            email,
-            password,
-            battery_threshold,
-            telegram_bot_token,
-            telegram_chat_id,
-            tracker_names,
-        )
-    )
+    interval = int(os.getenv("CHECK_INTERVAL_SECONDS", "43200"))  # default 12h
+    while True:
+        try:
+            asyncio.run(
+                main(
+                    email,
+                    password,
+                    battery_threshold,
+                    telegram_bot_token,
+                    telegram_chat_id,
+                    tracker_names,
+                )
+            )
+        except Exception as e:
+            print(f"check failed: {e}")
+        time.sleep(interval)

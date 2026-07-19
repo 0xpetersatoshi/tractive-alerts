@@ -27,6 +27,7 @@ All configuration is via environment variables.
 | `TELEGRAM_CHAT_ID`   | yes      | -       | Telegram chat/channel ID to post messages to.                              |
 | `BATTERY_THRESHOLD`  | no       | `50`    | Percentage below which a low-battery notification is sent. Must be an int. |
 | `TRACKER_NAMES`      | no       | -       | JSON object mapping tracker IDs to pet names (see below).                  |
+| `CHECK_INTERVAL_SECONDS` | no   | `43200` | Seconds to sleep between checks. The script loops forever, checking on this interval. |
 
 ### Personalizing notifications
 
